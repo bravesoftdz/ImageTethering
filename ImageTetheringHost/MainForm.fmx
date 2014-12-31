@@ -1,0 +1,60 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 1
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Position.X = 16.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 361.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object CornerButton1: TCornerButton
+    Corners = [TopRight, BottomRight]
+    Position.X = 376.000000000000000000
+    Position.Y = 8.000000000000000000
+    Sides = [Top, Left, Bottom, Right]
+    Size.Width = 161.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = #49324#51652#44277#50976' '#46356#47113#53664#47532' '#49440#53469
+    XRadius = 3.000000000000000000
+    YRadius = 3.000000000000000000
+    OnClick = CornerButton1Click
+  end
+  object ListBox1: TListBox
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 401.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+  end
+  object Button1: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 40.000000000000000000
+    TabOrder = 5
+    Text = 'Button1'
+    OnClick = Button1Click
+  end
+  object OpenDialog1: TOpenDialog
+    InitialDir = 'c:\'
+    Options = [ofHideReadOnly, ofPathMustExist, ofEnableSizing]
+    Title = 'test'
+    Left = 304
+    Top = 224
+  end
+end
