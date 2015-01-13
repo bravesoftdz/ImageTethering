@@ -11,6 +11,7 @@ object Form1: TForm1
   object Edit1: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 0
+    Text = 'C:\Users\Public\Pictures\Sample Pictures'
     Position.X = 16.000000000000000000
     Position.Y = 8.000000000000000000
     Size.Width = 361.000000000000000000
@@ -47,7 +48,7 @@ object Form1: TForm1
     Position.X = 16.000000000000000000
     Position.Y = 40.000000000000000000
     TabOrder = 5
-    Text = 'Button1'
+    Text = 'Display list'
     OnClick = Button1Click
   end
   object OpenDialog1: TOpenDialog
@@ -56,5 +57,24 @@ object Form1: TForm1
     Title = 'test'
     Left = 304
     Top = 224
+  end
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TImageListItemAppearance'
+    ItemEditAppearanceClassName = 'TImageListItemDeleteAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Position.X = 272.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 265.000000000000000000
+    Size.Height = 401.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+  end
+  object Button2: TButton
+    Position.X = 104.000000000000000000
+    Position.Y = 40.000000000000000000
+    TabOrder = 10
+    Text = 'Parent Path'
+    OnClick = Button2Click
   end
 end
