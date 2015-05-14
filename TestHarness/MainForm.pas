@@ -15,10 +15,19 @@ type
     Panel1: TPanel;
     Button1: TButton;
     Button2: TButton;
+    Rectangle1: TRectangle;
+    Button3: TButton;
+    Rectangle2: TRectangle;
+    Button4: TButton;
+    Button5: TButton;
     procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
-    FImageViewer: ThjImageViewer;
+    FImageSlider: TImageSlider;
   public
     { Public declarations }
   end;
@@ -30,11 +39,31 @@ implementation
 
 {$R *.fmx}
 
+procedure TForm2.Button1Click(Sender: TObject);
+begin
+  FImageSlider.MoveNext;
+end;
+
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-  FImageViewer := ThjImageViewer.Create(nil);
-  FImageViewer.Parent := Layout1;
-  FImageViewer.Align := TAlignLayout.Client;
+  FImageSlider := TImageSlider.Create(nil);
+  FImageSlider.Parent := Layout1;
+  FImageSlider.Align := TAlignLayout.Client;
+end;
+
+procedure TForm2.Button3Click(Sender: TObject);
+begin
+  FImageSlider.MovePrev;
+end;
+
+procedure TForm2.Button4Click(Sender: TObject);
+begin
+  FImageSlider.MoveLast;
+end;
+
+procedure TForm2.Button5Click(Sender: TObject);
+begin
+  FImageSlider.MoveFirst;
 end;
 
 end.

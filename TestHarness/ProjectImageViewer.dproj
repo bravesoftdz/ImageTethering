@@ -296,11 +296,6 @@
                 </Source>
             </Delphi.Personality>
             <Deployment Version="1">
-                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.entitlements" Configuration="Debug" Class="ProjectiOSEntitlements">
-                    <Platform Name="iOSDevice32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPhone_Spotlight40">
                     <Platform Name="iOSDevice32">
                         <Overwrite>true</Overwrite>
@@ -372,6 +367,18 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.info.plist" Configuration="Debug" Class="ProjectiOSInfoPList">
+                    <Platform Name="iOSDevice32">
+                        <RemoteName>Info.plist</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\ProjectImageViewer.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ProjectImageViewer.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1536.png" Configuration="Debug" Class="iPad_Launch2048x1536">
                     <Platform Name="iOSDevice32">
                         <RemoteName>Default-Landscape@2x~ipad.png</RemoteName>
@@ -380,6 +387,12 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_50x50.png" Configuration="Debug" Class="iPad_SpotLight50">
                     <Platform Name="iOSDevice32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.dSYM" Configuration="Debug" Class="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice32">
+                        <RemoteName>ProjectImageViewer</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -436,20 +449,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.info.plist" Configuration="Debug" Class="ProjectiOSInfoPList">
-                    <Platform Name="iOSDevice32">
-                        <RemoteName>Info.plist</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_76x76.png" Configuration="Debug" Class="iPad_AppIcon76">
                     <Platform Name="iOSDevice32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_2208x1242.png" Configuration="Debug" Class="iPhone_Launch2208">
                     <Platform Name="iOSDevice32">
-                        <RemoteName>ProjectImageViewer</RemoteName>
+                        <RemoteName>Default-Landscape-736h@3x.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -464,20 +471,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_2208x1242.png" Configuration="Debug" Class="iPhone_Launch2208">
+                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.entitlements" Configuration="Debug" Class="ProjectiOSEntitlements">
                     <Platform Name="iOSDevice32">
-                        <RemoteName>Default-Landscape-736h@3x.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_100x100.png" Configuration="Debug" Class="iPad_SpotLight100">
                     <Platform Name="iOSDevice32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win32\Debug\ProjectImageViewer.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>ProjectImageViewer.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -499,6 +499,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="iOSDevice32">
+                        <RemoteName>ProjectImageViewer</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png" Configuration="Debug" Class="iPhone_AppIcon114">
                     <Platform Name="iOSDevice32">
                         <Overwrite>true</Overwrite>
@@ -506,12 +512,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_40x40.png" Configuration="Debug" Class="iPad_SpotLight40">
                     <Platform Name="iOSDevice32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="iOSDevice32\Debug\ProjectImageViewer.dSYM" Configuration="Debug" Class="ProjectiOSDeviceDebug">
-                    <Platform Name="iOSDevice32">
-                        <RemoteName>ProjectImageViewer</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -891,19 +891,19 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="42f76f14bd3eaf8f">True</Platform>
-                <Platform value="iOSDevice32" ActiveMobileDevice="%iosdevice%93430cf83f73f67454fde4fcc35d49ff284d483b">True</Platform>
-                <Platform value="iOSDevice64" ActiveMobileDevice="%iosdevice%93430cf83f73f67454fde4fcc35d49ff284d483b">True</Platform>
-                <Platform value="iOSSimulator" ActiveMobileDevice="%iossimulator%B9FB3D25-6416-463F-A7C2-8E07A5F036E0">True</Platform>
+                <Platform value="Android">True</Platform>
+                <Platform value="iOSDevice32">True</Platform>
+                <Platform value="iOSDevice64">True</Platform>
+                <Platform value="iOSSimulator" ActiveMobileDevice="iPad">True</Platform>
                 <Platform value="OSX32">True</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
