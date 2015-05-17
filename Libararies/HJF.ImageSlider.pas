@@ -19,35 +19,47 @@ type
   TSlideContents = class(TControl)
   private
     [weak] FImageSlider: TImageSlider;
+    FSlideIndex: Integer;
+    FSlideCount: Integer;
+    FBufferCount: Integer;
+    procedure CreateSlides;
+    procedure GotoSlide(const Index: Integer);
+    procedure SetBufferCount(const Value: Integer);
   strict private
     procedure RealignSlides;
   protected
     procedure DoRealign; override;
   public
     constructor Create(AOwner: TComponent); override;
+
+    property BufferCount: Integer read FBufferCount write SetBufferCount;
+    property SlideIndex: Integer read FSlideIndex;
+
+    procedure NextSlide;
+    procedure PrevSlide;
   end;
 
   TImageSlider = class(TStyledControl)
   private const
-    DefaultSlideCount = 10;
+    DefaultBufferCount = 2;
   private
     FContents: TSlideContents;
     FList: TList<TRectangle>;
     FCurrentIndex: Integer;
-    FSlideCount: Integer;
-    procedure SetSlideCount(const Value: Integer);
+    FBufferCount: Integer;
+    FCount: Integer;
+    procedure SetBufferCount(const Value: Integer);
   protected
     procedure DoRealign; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
-    procedure MoveNext;
-    procedure MovePrev;
-    procedure MoveFirst;
-    procedure MoveLast;
+    procedure Next;
+    procedure Prev;
+    property Count: Integer read FCount;
   published
-    property SlideCount: Integer read FSlideCount write SetSlideCount;
+    property BufferCount: Integer read FBufferCount write SetBufferCount;
   end;
 
 implementation
@@ -77,16 +89,11 @@ begin
   if AOwner is TImageSlider then
     FImageSlider := TImageSlider(AOwner);
   ClipChildren := True;
+
+  FSlideIndex := 0;
 end;
 
-procedure TSlideContents.DoRealign;
-begin
-  inherited;
-
-  RealignSlides;
-end;
-
-procedure TSlideContents.RealignSlides;
+procedure TSlideContents.CreateSlides;
 var
   I: Integer;
   Slide: TSlide;
@@ -98,15 +105,15 @@ begin
   for I := ChildrenCount - 1 downto 0 do
     Children[I].Free;
 
-  for I := 0 to FImageSlider.SlideCount - 1 do
+  for I := 0 to FSlideCount - 1 do
   begin
     Slide := TSlide.Create(Self);
     Slide.Parent := Self;
     Slide.HitTest := False;
     Slide.Size.Size := FImageSlider.Size.Size;
-    Slide.Position.X := (Slide.Width + 10) * (I - FImageSlider.FCurrentIndex);
-    Slide.Position.Y := 0;
 //    Slide.ClipChildren := True;
+    Slide.Position.X := (Slide.Width + 10) * I;
+    Slide.Position.Y := 0;
 
 {$IFDEF DEBUG}
     R := TRectangle.Create(Slide);
@@ -124,14 +131,66 @@ begin
   end;
 end;
 
+procedure TSlideContents.DoRealign;
+begin
+  inherited;
+
+  if ChildrenCount = 0 then
+    CreateSlides;
+  RealignSlides;
+end;
+
+procedure TSlideContents.GotoSlide(const Index: Integer);
+var
+  I: Integer;
+begin
+  TAnimator.AnimateFloat(Self, 'Position.X', (FImageSlider.Width + 10) * -Index);
+end;
+
+procedure TSlideContents.NextSlide;
+var
+  Slide: TSlide;
+  TargetIndex: Integer;
+begin
+  TargetIndex := FSlideIndex mod FSlideCount + 3;
+  TargetIndex := TargetIndex mod 5;
+
+  Inc(FSlideIndex);
+  GotoSlide(FSlideIndex);
+
+  Slide := Children[TargetIndex] as TSlide;
+  Slide.Position.X := (Slide.Width + 10) * (FSlideIndex + 2);
+//  Slide.Position.Y := 10;
+end;
+
+procedure TSlideContents.PrevSlide;
+begin
+  Dec(FSlideIndex);
+  GotoSlide(FSlideIndex);
+end;
+
+procedure TSlideContents.RealignSlides;
+begin
+//    Slide.Position.X := (Slide.Width + 10) * (I - FImageSlider.FCurrentIndex);
+//    Slide.Position.Y := 0;
+end;
+
+procedure TSlideContents.SetBufferCount(const Value: Integer);
+begin
+  if FBufferCount = Value then
+    Exit;
+
+  FBufferCount := Value;
+  FSlideCount := FBufferCount * 2 + 1;
+end;
+
 { ThjImageViewer }
 
 constructor TImageSlider.Create(AOwner: TComponent);
-var
-  I: Integer;
-  Slide: TRectangle;
 begin
   inherited;
+
+  FBufferCount := DefaultBufferCount;
 
   FContents := TSlideContents.Create(Self);
   FContents.Parent := Self;
@@ -139,27 +198,9 @@ begin
   FContents.Locked := True;
   FContents.Stored := False;
   FContents.ClipChildren := False;
+  FContents.BufferCount := FBufferCount;
 
-  FSlideCount := DefaultSlideCount;
-//  ClipChildren := True;
-{
-  FList := TList<TRectangle>.Create;
-  FCurrentIndex := 0;
-
-  for I := 0 to 2 do
-  begin
-    Slide := TRectangle.Create(Self);
-    Slide.Parent := Self;
-    if I mod 2 = 0 then
-      Slide.Fill.Color := claRed
-    else
-      Slide.Fill.Color := claBlue;
-    // DEBUG
-    Slide.ClipChildren := True;
-
-    FList.Add(Slide);
-  end;
-}
+  FCount := 10;
 end;
 
 destructor TImageSlider.Destroy;
@@ -170,63 +211,31 @@ begin
 end;
 
 procedure TImageSlider.DoRealign;
-var
-  I: Integer;
-  Slide: TRectangle;
 begin
   inherited;
 
   FContents.Realign;
-{
-  for I := 0 to FList.Count - 1 do
-  begin
-    Slide := FList[I];
-    Slide.Width  := Self.Width;
-    Slide.Height := Self.Height;
-
-    Slide.Position.X := (I - FCurrentIndex) * (Self.Width + 10);
-    Slide.Position.Y := 0;
-  end;
-}
 end;
 
-procedure TImageSlider.MoveFirst;
+procedure TImageSlider.Next;
 begin
-  FCurrentIndex := 0;
-  TAnimator.AnimateFloat(FContents, 'Position.X', (Width + 10) * (-FCurrentIndex));
+  if FCount - 1 > FContents.SlideIndex then
+    FContents.NextSlide;
 end;
 
-procedure TImageSlider.MoveLast;
+procedure TImageSlider.Prev;
 begin
-  FCurrentIndex := SlideCount - 1;
-  TAnimator.AnimateFloat(FContents, 'Position.X', (Width + 10) * (-FCurrentIndex));
+  if FContents.SlideIndex > 0 then
+    FContents.PrevSlide;
 end;
 
-procedure TImageSlider.MoveNext;
+procedure TImageSlider.SetBufferCount(const Value: Integer);
 begin
-  if SlideCount - 1 > FCurrentIndex then
-  begin
-    Inc(FCurrentIndex);
-    TAnimator.AnimateFloat(FContents, 'Position.X', (Width + 10) * (-FCurrentIndex));
-  end;
-end;
-
-procedure TImageSlider.MovePrev;
-begin
-  if FCurrentIndex > 0 then
-  begin
-    Dec(FCurrentIndex);
-    TAnimator.AnimateFloat(FContents, 'Position.X', (Width + 10) * (-FCurrentIndex));
-  end;
-end;
-
-procedure TImageSlider.SetSlideCount(const Value: Integer);
-begin
-  if FSlideCount = Value then
+  if FBufferCount = Value then
     Exit;
 
-  FSlideCount := Value;
-
+  FBufferCount := Value;
+  FContents.BufferCount := Value;
   FContents.Realign;
 end;
 

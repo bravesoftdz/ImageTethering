@@ -49,14 +49,12 @@ object Form2: TForm2
       Position.Y = 19.000000000000000000
       TabOrder = 2
       Text = 'Button4'
-      OnClick = Button4Click
     end
     object Button5: TButton
       Position.X = 176.000000000000000000
       Position.Y = 17.000000000000000000
       TabOrder = 3
       Text = 'Button5'
-      OnClick = Button5Click
     end
   end
   object Layout1: TLayout

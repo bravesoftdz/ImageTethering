@@ -23,8 +23,6 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
     FImageSlider: TImageSlider;
@@ -41,7 +39,7 @@ implementation
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
-  FImageSlider.MoveNext;
+  FImageSlider.Next;
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);
@@ -53,17 +51,7 @@ end;
 
 procedure TForm2.Button3Click(Sender: TObject);
 begin
-  FImageSlider.MovePrev;
-end;
-
-procedure TForm2.Button4Click(Sender: TObject);
-begin
-  FImageSlider.MoveLast;
-end;
-
-procedure TForm2.Button5Click(Sender: TObject);
-begin
-  FImageSlider.MoveFirst;
+  FImageSlider.Prev;
 end;
 
 end.
