@@ -15,11 +15,10 @@ type
     Panel1: TPanel;
     Button1: TButton;
     Button2: TButton;
-    Rectangle1: TRectangle;
     Button3: TButton;
-    Rectangle2: TRectangle;
     Button4: TButton;
     Button5: TButton;
+    Rectangle2: TRectangle;
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);

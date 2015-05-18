@@ -58,25 +58,16 @@ object Form2: TForm2
     end
   end
   object Layout1: TLayout
-    Position.X = 232.000000000000000000
-    Position.Y = 64.000000000000000000
-    Size.Width = 280.000000000000000000
-    Size.Height = 360.000000000000000000
+    Align = Client
+    Size.Width = 780.000000000000000000
+    Size.Height = 403.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    object Rectangle1: TRectangle
-      ClipChildren = True
-      Position.X = 392.000000000000000000
-      Position.Y = 216.000000000000000000
-      Size.Width = 50.000000000000000000
-      Size.Height = 50.000000000000000000
-      Size.PlatformDefault = False
-    end
     object Rectangle2: TRectangle
       Align = Client
       Fill.Color = claGreen
-      Size.Width = 280.000000000000000000
-      Size.Height = 360.000000000000000000
+      Size.Width = 780.000000000000000000
+      Size.Height = 403.000000000000000000
       Size.PlatformDefault = False
     end
   end
